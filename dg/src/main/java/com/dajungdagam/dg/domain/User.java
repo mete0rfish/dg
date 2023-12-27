@@ -20,6 +20,10 @@ public class User {
     @Nullable
     private String nickName;
 
+    @Column(unique = true, length = 10)
+    @Nullable
+    private String kakaoName;
+
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="area_id")
@@ -31,18 +35,19 @@ public class User {
     @Column(length = 50)
     private String info;
 
-    public User(int id, String email, String nickName, Area area, RoleType role, String info) {
+    public User(int id, @Nullable String email, @Nullable String nickName, @Nullable String kakaoName, Area area, RoleType role, String info) {
         this.id = id;
         this.email = email;
         this.nickName = nickName;
+        this.kakaoName = kakaoName;
         this.area = area;
         this.role = role;
         this.info = info;
     }
 
-    public User(int id, String nickName, RoleType role) {
+    public User(int id, String kakaoName, RoleType role) {
         this.id = id;
-        this.nickName = nickName;
+        this.kakaoName = kakaoName;
         this.role = role;
     }
 

@@ -72,11 +72,13 @@ public class SecurityConfiguration {
                 .cors().and()
                 .authorizeRequests()
                 .requestMatchers("/login/**").permitAll() // login은 막고
+                .requestMatchers("/h2-console/**").permitAll() // login은 막고
                 .requestMatchers(HttpMethod.POST, "/mypage/**").authenticated() // mypage는 인증하도록 설정
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // jwt 사용시 사용
                 .and()
+                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .addFilterBefore(new JwtFilter(userService, secretKey), UsernamePasswordAuthenticationFilter.class) // jwtfiler에서 처리하도록
                 .build();
     }

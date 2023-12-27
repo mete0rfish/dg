@@ -69,11 +69,11 @@ public class TestController {
 
         // ~~ 확인용 ~~
         //String email = (String)userInfo.get("email");
-        String nickname = userKakaoLoginResponseDto.getUser().getNickName();
+        String kakaoName = userKakaoLoginResponseDto.getUser().getKakaoName();
         String jwtToken = userKakaoLoginResponseDto.getJwtToken();
 
         //System.out.println("email = " + email);
-        log.info("nickName: "+ nickname);
+        log.info("kakaoName: "+ kakaoName);
         log.info("jwtToken: "+ jwtToken);
 
         return new ResponseEntity<>(userKakaoLoginResponseDto, headers, userKakaoLoginResponseDto.getHttpStatus());

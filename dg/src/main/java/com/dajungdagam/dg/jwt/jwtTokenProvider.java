@@ -10,7 +10,7 @@ public class jwtTokenProvider {
     // token에서 username 꺼내 컨트롤러에 전달
     public static String getUserName(String token, String secretKey) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
-                .getBody().get("nickName", String.class);
+                .getBody().get("kakaoName", String.class);
     }
 
 
@@ -21,9 +21,9 @@ public class jwtTokenProvider {
                 .getBody().getExpiration().before(new Date());
     }
 
-    public static String createToken(String nickName, String secretKey, Long expiredMs){
+    public static String createToken(String kakaoName, String secretKey, Long expiredMs){
         Claims claims = Jwts.claims();
-        claims.put("nickName", nickName);
+        claims.put("kakaoName", kakaoName);
 
         return Jwts.builder()
                 .setClaims(claims)
