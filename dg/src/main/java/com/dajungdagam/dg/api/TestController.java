@@ -4,6 +4,7 @@ import com.dajungdagam.dg.domain.dto.UserKakaoLoginResponseDto;
 import com.dajungdagam.dg.domain.dto.UserResponseDto;
 import com.dajungdagam.dg.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -20,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Map;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class TestController {
@@ -43,6 +45,7 @@ public class TestController {
     @RequestMapping("/login/oauth2/code/kakao")
     public ResponseEntity<?> kakaoLogin(@RequestParam String code){
         // 1. 인가 코드 받기
+        log.info("eeeee");
 
         // 2. 토큰 받기
         ArrayList<String> tokens = new ArrayList<>();
@@ -66,11 +69,12 @@ public class TestController {
 
         // ~~ 확인용 ~~
         //String email = (String)userInfo.get("email");
-        String nickname = (String)userInfo.get("nickname");
+        String nickname = userKakaoLoginResponseDto.getUser().getNickName();
+        String jwtToken = userKakaoLoginResponseDto.getJwtToken();
 
         //System.out.println("email = " + email);
-        System.out.println("nickname = " + nickname);
-        System.out.println("accessToken = " + accessToken);
+        log.info("nickName: "+ nickname);
+        log.info("jwtToken: "+ jwtToken);
 
         return new ResponseEntity<>(userKakaoLoginResponseDto, headers, userKakaoLoginResponseDto.getHttpStatus());
     }

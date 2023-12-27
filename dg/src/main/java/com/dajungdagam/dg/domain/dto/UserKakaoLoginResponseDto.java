@@ -13,12 +13,12 @@ import org.springframework.http.HttpStatus;
 public class UserKakaoLoginResponseDto {
 
     private HttpStatus httpStatus;
-    private String accessToken;
+    private String jwtToken;
     private User user;
 
     public UserKakaoLoginResponseDto(HttpStatus httpStatus, String accessToken, User user) {
         this.httpStatus = httpStatus;
-        this.accessToken = accessToken;
+        this.jwtToken = accessToken;
         this.user = user;
     }
 }

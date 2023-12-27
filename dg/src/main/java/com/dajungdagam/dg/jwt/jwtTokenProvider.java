@@ -7,6 +7,19 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 
 public class jwtTokenProvider {
+    // token에서 username 꺼내 컨트롤러에 전달
+    public static String getUserName(String token, String secretKey) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
+                .getBody().get("nickName", String.class);
+    }
+
+
+
+    // Token Expired 체크
+    public static boolean isExpired(String token, String secretKey){
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
+                .getBody().getExpiration().before(new Date());
+    }
 
     public static String createToken(String nickName, String secretKey, Long expiredMs){
         Claims claims = Jwts.claims();

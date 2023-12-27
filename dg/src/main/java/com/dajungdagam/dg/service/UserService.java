@@ -41,6 +41,7 @@ public class UserService {
             userResponseDto = findByUserKakaoNickName(nickName);
         }
 
+        // JWT 토큰 발행
         String token = jwtTokenProvider.createToken(nickName, secretKey, expiredMs);
         return new UserKakaoLoginResponseDto(HttpStatus.OK, token, userResponseDto.getUser());
     }
