@@ -74,4 +74,9 @@ public class UserService {
     }
 
 
+    // 유저 별명 업데이트
+
+
+    // 유저 사는곳 업데이트
+
 }

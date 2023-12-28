@@ -1,5 +1,6 @@
 package com.dajungdagam.dg.api;
 
+import com.dajungdagam.dg.domain.User;
 import com.dajungdagam.dg.domain.dto.UserKakaoLoginResponseDto;
 import com.dajungdagam.dg.domain.dto.UserResponseDto;
 import com.dajungdagam.dg.service.UserService;
@@ -11,10 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -79,7 +77,19 @@ public class TestController {
         return new ResponseEntity<>(userKakaoLoginResponseDto, headers, userKakaoLoginResponseDto.getHttpStatus());
     }
 
-    // 추가적인 정보: 닉네임, 주소 요청오면 처리
-    // 처리할 때, ㅇ
+//    @PostMapping("/login/details/v1")
+//    public ResponseEntity<String> loginDetailsNickName(@RequestParam String kakaoName, @RequestParam String nickName){
+//        // 1. kakaoName 으로 유저 찾기
+//        UserResponseDto userResponseDto = userService.findByUserKakaoNickName(kakaoName);
+//        User user = userResponseDto.getUser();
+//
+//        // 2. user의 nickName에 추가하기
+//        user.setNickName(nickName);
+//
+//    }
 
+    @PostMapping("/login/details/v2")
+    public ResponseEntity<String> loginDetailsArea(@RequestParam String kakaoName, @RequestParam String gu_name, @RequestParam String dong_name){
+        // 1. kakaoName 으로 유저 찾기
+    }
 }
