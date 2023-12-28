@@ -77,19 +77,28 @@ public class TestController {
         return new ResponseEntity<>(userKakaoLoginResponseDto, headers, userKakaoLoginResponseDto.getHttpStatus());
     }
 
-//    @PostMapping("/login/details/v1")
-//    public ResponseEntity<String> loginDetailsNickName(@RequestParam String kakaoName, @RequestParam String nickName){
-//        // 1. kakaoName 으로 유저 찾기
-//        UserResponseDto userResponseDto = userService.findByUserKakaoNickName(kakaoName);
-//        User user = userResponseDto.getUser();
-//
-//        // 2. user의 nickName에 추가하기
-//        user.setNickName(nickName);
-//
-//    }
+    @PostMapping("/login/details/v1")
+    public ResponseEntity<String> loginDetailsNickName(@RequestParam String kakaoName, @RequestParam String nickName){
+        log.info("requestParam됨. " + kakaoName + " " + nickName);
+        int id = userService.updateUserNickName(kakaoName, nickName);
+
+        if(id == -1){
+            return ResponseEntity.notFound().build();
+        }
+
+        log.info("id: "+id+ " 유저의 별명이 업데이트 됨.");
+        return ResponseEntity.ok().build();
+    }
 
     @PostMapping("/login/details/v2")
     public ResponseEntity<String> loginDetailsArea(@RequestParam String kakaoName, @RequestParam String gu_name, @RequestParam String dong_name){
-        // 1. kakaoName 으로 유저 찾기
+        int id = userService.updateUserArea(kakaoName, gu_name, dong_name);
+
+        if(id == -1){
+            return ResponseEntity.notFound().build();
+        }
+
+        log.info("id: "+ id + " 유저의 사는 곳이 업데이트 됨.");
+        return ResponseEntity.ok().build();
     }
 }
