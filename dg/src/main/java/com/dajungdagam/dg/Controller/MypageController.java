@@ -12,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,16 +28,18 @@ public class MypageController {
 
     @PostMapping("/mypage/{userId}")
     public ResponseEntity<String> getWrittenPosts(Authentication authentication) {
-        UserWrittenPostDto userWrittenPostDto =
+
 
         return ResponseEntity.ok().body(authentication.getName() + "님의 마이페이지 입니다.");
     }
 
     // JWT Token 복호화 테스트
     @GetMapping("/jwt/claims")
-    public String getClaims(String jwtToken){
-        Jws<Claims> claims = tokenDecoderoken.getClaims(jwtToken);
-        log.info(claims.getBody().get())
+    public ResponseEntity<String> getClaims(@RequestParam String jwtToken){
+        Jws<Claims> claims = jwtTokenDecoder.getClaims(jwtToken);
+        String kakaoName = claims.getBody().get("kakaoName").toString();
+        log.info("kakao: " + kakaoName);
+        return ResponseEntity.ok(kakaoName);
     }
 
 }

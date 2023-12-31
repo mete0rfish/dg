@@ -14,9 +14,9 @@ public class jwtTokenDecoder {
     private String jwtToken;
 
     @Value("${jwt.secretKey}")
-    private String secretKey;
+    private static String secretKey;
 
-    public Jws<Claims> getClaims(String jwt){
+    public static Jws<Claims> getClaims(String jwt){
         try{
             return
                     Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwt);

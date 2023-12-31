@@ -36,4 +36,12 @@ public class Wishlist {
     public Wishlist() {
 
     }
+
+    public Wishlist(int id, ArrayList<GbPost> gbPost, ArrayList<TradePost> tradePost, LocalDateTime createdTime, User user) {
+        this.id = id;
+        this.gbPost = gbPost;
+        this.tradePost = tradePost;
+        this.createdTime = createdTime;
+        this.user = user;
+    }
 }
